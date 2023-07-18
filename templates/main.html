@@ -4,5 +4,13 @@
 {% block title %} Blog Main {% endblock %}
 
 {% block content %}
-<h1>main</h1>
+    <h1>MAIN</h1>
+    <a href="{% url 'users:signup' %}" class="btn">Signup</a>
+    {% if user.is_authenticated %}
+        <p>Welcome, {{ user.username }}</p>
+        <a href="{% url 'users:logout' %}" class="btn">Logout</a>
+    {% else %}
+        <!-- <p>Please, Login</p> -->
+        <a href="{% url 'users:login' %}" class="btn">Login</a>
+    {% endif %}
 {% endblock %}
