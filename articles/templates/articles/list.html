@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>LIST</h2>
+    {% if user.is_authenticated %}
+    <a href="{% url 'articles:write' %}">write</a>
+    {% endif %}
+    <table border="1">
+        <tr>
+            <th>title</th>
+            <th>writer</th>
+            <th>views</th>
+        </tr>
+        {% for article in articles %}
+        <tr>
+            <td>{% article.title %}</td>
+            <td>{% article.writer %}</td>
+            <td>{% article.views %}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
