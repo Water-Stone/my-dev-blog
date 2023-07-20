@@ -7,7 +7,7 @@ User = get_user_model()
 class Article(models.Model):
     title = models.CharField(max_length=30)
     content = models.TextField()
-    img = models.ImageField()
+    img = models.ImageField(blank=True, upload_to='images/')
     writer = models.ForeignKey(User, on_delete=models.CASCADE)
     views = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)

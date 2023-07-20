@@ -21,12 +21,12 @@ class Write(LoginRequiredMixin, View):
         form = ArticleForm()
         context = {
             'form': form,
-            "title": "Blog"
+            "title": "Article Write"
         }
         return render(request, 'articles/write.html', context)
     
     def post(self, request):
-        form = ArticleForm(request.POST)
+        form = ArticleForm(request.POST, request.FILES)
         
         if form.is_valid():
             article = form.save(commit=False)
