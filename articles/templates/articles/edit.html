@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if form.errors %}
+    {% include 'articles/form_error.html' %}
+{% else %}
+    <p>Edit Article</p>
+    <form action="{% url 'articles:edit' pk=article.pk %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Edit">
+    </form>
+{% endif %}
+{% endblock %}

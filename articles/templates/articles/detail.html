@@ -1,9 +1,85 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h2>{% article.title %}</h2>
-    <p>writer: {% article.writer %}</p>
+    <h2>{{ article_title }}</h2>
+    <p>writer: {{ article_writer }}</p>
+
+    {% if article_writer == request.user %}
+        <a href="{% url 'articles:edit' pk=article_id %}" class="btn">Edit</a>
+        <form action="{% url 'articles:delete' pk=article_id %}" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Delete" class="btn">
+        </form>
+    {% endif %}
+
+
     <section>
-        <p>{% article.content %}</p>
+        <p>{{ article_content }}</p>
+        <img src="{{ article_img_url }}" alt="img">
     </section>
+    <hr>
+
+    <h3>Comments</h3>
+    <form action="{% url 'articles:cm-write' pk=article_id %}" method="post">
+        {% csrf_token %}
+        {% if comment_form.errors %}
+            {% with form=comment_form %}
+                {% include 'articles/form_error.html' %}
+            {% endwith %}
+        {% else %}
+            {{ comment_form.content }}
+        {% endif %}
+        <input type="submit" value="Submit">
+    </form>
+
+    <hr>
+    {% if comments %}
+        <ul>
+            {% for comment in comments %}
+                <li>{{ comment.content }} / {{ comment.created_at }}
+                    {% if comment.writer == request.user %}
+                        <form action="{% url 'articles:cm-delete' pk=comment.pk %}" method="post">
+                            {% csrf_token %}
+                            <input type="submit" value="X" class='btn'>
+                        </form>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>There is no comment.</p>
+    {% endif %}
+    <hr>
+
+    <h3>Hashtags</h3>
+    <form action="{% url 'articles:tag-write' pk=article_id %}" method="post">
+        {% csrf_token %}
+        {% if hashtag_form.errors %}
+            {% with form=hashtag_form %}
+                {% include 'articles/form_error.html' %}
+            {% endwith %}
+        {% else %}
+            {{ hashtag_form.name }}
+        {% endif %}
+        <input type="submit" value="Submit">
+    </form>
+
+    {% if hashtags %}
+        <ul>
+            {% for hashtag in hashtags %}
+            <li>
+                {{ hashtag }}
+                {% if hashtag.writer == request.user %}
+                    <form action="{% url 'articles:tag-delete' pk=hashtag.pk %}" method="post">
+                        {% csrf_token %}
+                        <input type="submit" value="X" class='btn'>
+                    </form>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <br>
+        <p>There is no hashtag.</p>
+    {% endif %}
 {% endblock %}
