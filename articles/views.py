@@ -48,9 +48,9 @@ class Update(View):
         context = {
             'form': form,
             'article': article,
-            "title": "Blog"
+            "title": "Edit"
         }
-        return render(request, 'article/edit.html', context)
+        return render(request, 'articles/edit.html', context)
     
     def post(self, request, pk):
         article = get_object_or_404(Article, pk=pk)
@@ -93,6 +93,7 @@ class DetailView(View):
             'article_title': article.title,
             'article_writer': article.writer,
             'article_content': article.content,
+            'article_img_url' : article.img.url,
             'article_created_at': article.created_at,
             'comments': comments,
             'hashtags': hashtags,
@@ -100,7 +101,7 @@ class DetailView(View):
             'hashtag_form': hashtag_form,
         }
         
-        return render(request, 'article/detail.html', context)
+        return render(request, 'articles/detail.html', context)
 
 
 ### Comment
@@ -120,7 +121,7 @@ class CommentWrite(LoginRequiredMixin, View):
             except ValidationError as e:
                 print('Valdation error occurred', str(e))
             
-            return redirect('article:detail', pk=pk)
+            return redirect('articles:detail', pk=pk)
         
         hashtag_form = HashTagForm()
         
@@ -132,7 +133,7 @@ class CommentWrite(LoginRequiredMixin, View):
             'comment_form': form,
             'hashtag_form': hashtag_form
         }
-        return render(request, 'article/detail.html', context)
+        return render(request, 'articles/detail.html', context)
 
 
 class CommentDelete(View):
@@ -143,7 +144,7 @@ class CommentDelete(View):
 
         comment.delete()
         
-        return redirect('blog:detail', pk=article_id)
+        return redirect('articles:detail', pk=article_id)
 
 
 ### Tag
@@ -164,12 +165,12 @@ class HashTagWrite(LoginRequiredMixin, View):
             except ValidationError as e:
                 print('Valdation error occurred', str(e))
 
-            return redirect('article:detail', pk=pk)
+            return redirect('articles:detail', pk=pk)
 
         comment_form = CommentForm()
         
         context = {
-            'title': 'Blog',
+            'title': 'Article',
             'article': article,
             'comments': article.comment_set.all(),
             'hashtags': article.hashtag_set.all(),
@@ -177,7 +178,7 @@ class HashTagWrite(LoginRequiredMixin, View):
             'hashtag_form': form
         }
         
-        return render(request, 'article/detail.html', context)
+        return render(request, 'articles/detail.html', context)
 
 
 class HashTagDelete(View):
@@ -187,4 +188,4 @@ class HashTagDelete(View):
 
         hashtag.delete()
         
-        return redirect('article:detail', pk=article_id)
+        return redirect('articles:detail', pk=article_id)
