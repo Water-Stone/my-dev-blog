@@ -1,8 +1,11 @@
 {% extends "base.html" %}
 
+{{ article.view_count }}
+
 {% block content %}
     <h2>{{ article_title }}</h2>
     <p>writer: {{ article_writer }}</p>
+    <p>views: {{ article_views }}</p>
 
     {% if article_writer == request.user %}
         <a href="{% url 'articles:edit' pk=article_id %}" class="btn">Edit</a>
@@ -11,7 +14,6 @@
             <input type="submit" value="Delete" class="btn">
         </form>
     {% endif %}
-
 
     <section>
         <p>{{ article_content }}</p>

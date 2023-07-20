@@ -89,10 +89,12 @@ class DetailView(View):
         
         context = {
             "title": "Article",
+            'article': article,
             'article_id': pk,
             'article_title': article.title,
             'article_writer': article.writer,
             'article_content': article.content,
+            'article_views': article.views,
             'article_img_url' : article.img.url,
             'article_created_at': article.created_at,
             'comments': comments,
