@@ -11,12 +11,15 @@
             <th>writer</th>
             <th>views</th>
         </tr>
+        {% if not articles %}
+            <p>No Articles...</p>
+        {% endif %}
         {% for article in articles %}
-        <tr>
-            <td>{% article.title %}</td>
-            <td>{% article.writer %}</td>
-            <td>{% article.views %}</td>
-        </tr>
+            <tr>
+                <td><a href="{% url 'articles:detail' pk=article.pk %}" class="btn">{{ article.title }}</a></td>
+                <td>{{ article.writer }}</td>
+                <td>{{ article.views }}</td>
+            </tr>
         {% endfor %}
     </table>
 {% endblock %}
