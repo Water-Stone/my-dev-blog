@@ -46,9 +46,6 @@ mid-myblog
 │  ├─ apps.py
 │  ├─ forms.py
 │  ├─ migrations
-│  │  ├─ 0001_initial.py
-│  │  ├─ 0002_alter_article_img.py
-│  │  └─ __init__.py
 │  ├─ models.py
 │  ├─ templates
 │  │  └─ articles
@@ -73,8 +70,6 @@ mid-myblog
 │  ├─ apps.py
 │  ├─ forms.py
 │  ├─ migrations
-│  │  ├─ 0001_initial.py
-│  │  └─ __init__.py
 │  ├─ models.py
 │  ├─ templates
 │  │  └─ users
