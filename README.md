@@ -12,7 +12,7 @@ My Dev Blog with Django.
 
 -   Requirements.txt
 
-    ```py
+    ```
     asgiref==3.7.2
     Django==4.2.3
     django-bootstrap5==23.3
