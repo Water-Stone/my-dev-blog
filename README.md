@@ -126,3 +126,4 @@ mid-myblog
 -   게시글 정렬 기능
 -   Bootstrap 탬플릿 적용
 -   Navbar 추가
+-   배포
