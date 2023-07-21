@@ -118,6 +118,25 @@ mid-myblog
 "articles/detail/<int:pk>/hashtag/delete/": 해쉬태그 삭제
 ```
 
+## 구현
+
+-   메인
+    ![img](readme/main.png)
+-   메인(로그인 시)
+    ![img](readme/main-login.png)
+-   회원가입
+    ![img](readme/signup.png)
+-   로그인
+    ![img](readme/login.png)
+-   게시글 목록
+    ![img](readme/list.png)
+-   게시글 쓰기
+    ![img](readme/write.png)
+-   게시글 상세보기
+    ![img](readme/detail.png)
+-   게시글 상세보기(타 유저의 글)
+    ![img](readme/detail-notmine.png)
+
 ## TODO
 
 -   조회수 제대로 작동하도록 수정
